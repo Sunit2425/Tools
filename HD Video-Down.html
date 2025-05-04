@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online tool to download videos from YouTube, Instagram, and TikTok without watermark in HD quality. Fast, secure, and easy to use.">
+    <meta name="keywords" content="youtube downloader, instagram video download, tiktok downloader without watermark, hd video download, free video downloader">
+    <meta name="author" content="Video Downloader Tool">
+    <meta name="robots" content="index, follow">
+    <title>HD Video Downloader | YouTube, Instagram, TikTok No Watermark</title>
+    <link rel="canonical" href="https://yourwebsite.com" />
+    <style>
+        :root {
+            --primary-color: #4285f4;
+            --secondary-color: #34a853;
+            --accent-color: #ea4335;
+            --light-color: #f8f9fa;
+            --dark-color: #202124;
+            --gray-color: #5f6368;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        main {
+            padding: 2rem 0;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--gray-color);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .download-box {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .tab-container {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--gray-color);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .input-group {
+            display: flex;
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-group input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.3s;
+        }
+        
+        .input-group input:focus {
+            border-color: var(--primary-color);
+        }
+        
+        .input-group button {
+            padding: 0 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .input-group button:hover {
+            background-color: #3367d6;
+        }
+        
+        .result-container {
+            display: none;
+            margin-top: 2rem;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .video-preview {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .video-preview img {
+            max-width: 100%;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+        }
+        
+        .download-options {
+            width: 100%;
+        }
+        
+        .download-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .download-option button {
+            padding: 0.5rem 1rem;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .download-option button:hover {
+            background-color: #2d9249;
+        }
+        
+        .ad-container {
+            background-color: #f1f3f4;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 2rem 0;
+            text-align: center;
+            min-height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 0.75rem;
+            color: var(--dark-color);
+        }
+        
+        .feature-card p {
+            color: var(--gray-color);
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            margin: 1rem 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            color: #9aa0a6;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .input-group {
+                flex-direction: column;
+            }
+            
+            .input-group input {
+                border-radius: 5px;
+                margin-bottom: 0.5rem;
+            }
+            
+            .input-group button {
+                border-radius: 5px;
+                padding: 0.75rem;
+            }
+            
+            .tab-container {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            .hero {
+                padding: 2rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .download-box {
+                padding: 1.5rem;
+            }
+            
+            .tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            margin: 2rem auto;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary-color);
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Error message */
+        .error-message {
+            display: none;
+            color: var(--accent-color);
+            background-color: rgba(234, 67, 53, 0.1);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            text-align: center;
+        }
+    </style>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">VideoDownloader</a>
+            <div class="mobile-menu">☰</div>
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-to-use">How to Use</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <!-- Top Ad Banner -->
+            <div class="ad-container">
+                <!-- Replace with your AdSense code -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                     data-ad-slot="YOUR_AD_SLOT_ID"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            
+            <section class="hero">
+                <h1>Download HD Videos Without Watermark</h1>
+                <p>Free online tool to download videos from YouTube, Instagram, and TikTok in high quality. Fast, secure, and easy to use.</p>
+            </section>
+            
+            <section class="download-box">
+                <div class="tab-container">
+                    <div class="tab active" data-tab="youtube">YouTube</div>
+                    <div class="tab" data-tab="instagram">Instagram</div>
+                    <div class="tab" data-tab="tiktok">TikTok</div>
+                </div>
+                
+                <div class="tab-content active" id="youtube-tab">
+                    <div class="input-group">
+                        <input type="text" id="youtube-url" placeholder="Paste YouTube video URL here..." required>
+                        <button id="youtube-submit">Download</button>
+                    </div>
+                    <div class="spinner" id="youtube-spinner"></div>
+                    <div class="error-message" id="youtube-error"></div>
+                    <div class="result-container" id="youtube-result">
+                        <!-- Results will be populated here -->
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="instagram-tab">
+                    <div class="input-group">
+                        <input type="text" id="instagram-url" placeholder="Paste Instagram video URL here..." required>
+                        <button id="instagram-submit">Download</button>
+                    </div>
+                    <div class="spinner" id="instagram-spinner"></div>
+                    <div class="error-message" id="instagram-error"></div>
+                    <div class="result-container" id="instagram-result">
+                        <!-- Results will be populated here -->
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="tiktok-tab">
+                    <div class="input-group">
+                        <input type="text" id="tiktok-url" placeholder="Paste TikTok video URL here..." required>
+                        <button id="tiktok-submit">Download</button>
+                    </div>
+                    <div class="spinner" id="tiktok-spinner"></div>
+                    <div class="error-message" id="tiktok-error"></div>
+                    <div class="result-container" id="tiktok-result">
+                        <!-- Results will be populated here -->
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Middle Ad Banner -->
+            <div class="ad-container">
+                <!-- Replace with your AdSense code -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                     data-ad-slot="YOUR_AD_SLOT_ID"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            
+            <section class="features" id="features">
+                <div class="feature-card">
+                    <i>📱</i>
+                    <h3>No Watermark</h3>
+                    <p>Download TikTok videos without the annoying watermark for clean, high-quality content.</p>
+                </div>
+                <div class="feature-card">
+                    <i>⚡</i>
+                    <h3>Fast Downloads</h3>
+                    <p>Our servers process your requests quickly so you get your videos without waiting.</p>
+                </div>
+                <div class="feature-card">
+                    <i>🔒</i>
+                    <h3>Secure & Private</h3>
+                    <p>We don't store your videos or personal information. Your privacy is our priority.</p>
+                </div>
+            </section>
+            
+            <section id="how-to-use">
+                <h2 style="text-align: center; margin-bottom: 1.5rem;">How to Download Videos</h2>
+                <div class="feature-card">
+                    <h3>For YouTube:</h3>
+                    <ol style="padding-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Copy the URL of the YouTube video you want to download</li>
+                        <li>Paste it in the YouTube tab above</li>
+                        <li>Click "Download" and choose your preferred quality</li>
+                    </ol>
+                </div>
+                <div class="feature-card" style="margin-top: 1rem;">
+                    <h3>For Instagram/TikTok:</h3>
+                    <ol style="padding-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Open the Instagram/TikTok app and find the video</li>
+                        <li>Tap "Share" and copy the link</li>
+                        <li>Paste it in the respective tab above</li>
+                        <li>Click "Download" to get the watermark-free version</li>
+                    </ol>
+                </div>
+            </section>
+            
+            <!-- Bottom Ad Banner -->
+            <div class="ad-container">
+                <!-- Replace with your AdSense code -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                     data-ad-slot="YOUR_AD_SLOT_ID"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            
+            <section class="feature-card" id="faq">
+                <h2 style="text-align: center; margin-bottom: 1.5rem;">Frequently Asked Questions</h2>
+                <div style="margin-bottom: 1rem;">
+                    <h3>Is this service free to use?</h3>
+                    <p>Yes, our video downloader is completely free with no hidden charges.</p>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <h3>What video qualities are available?</h3>
+                    <p>We support up to 4K for YouTube and HD for Instagram/TikTok depending on the original video quality.</p>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <h3>Do you support private videos?</h3>
+                    <p>No, our tool only works with publicly available videos.</p>
+                </div>
+                <div>
+                    <h3>Is this legal?</h3>
+                    <p>Our tool is for personal use only. Please respect copyright laws and only download videos you have permission to use.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <a href="#" class="logo" style="color: white; margin-bottom: 1rem;">VideoDownloader</a>
+            <div class="footer-links">
+                <a href="#">Home</a>
+                <a href="#features">Features</a>
+                <a href="#how-to-use">How to Use</a>
+                <a href="#faq">FAQ</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+            <p class="copyright">© 2023 VideoDownloader. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.getElementById('nav-menu').classList.toggle('show');
+        });
+        
+        // Tab switching
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                const tabId = tab.getAttribute('data-tab') + '-tab';
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Mock download functionality (in a real app, this would connect to a backend)
+        function mockDownload(platform) {
+            const urlInput = document.getElementById(`${platform}-url`);
+            const spinner = document.getElementById(`${platform}-spinner`);
+            const errorMsg = document.getElementById(`${platform}-error`);
+            const resultContainer = document.getElementById(`${platform}-result`);
+            
+            // Validate URL
+            if (!urlInput.value) {
+                errorMsg.textContent = 'Please enter a video URL';
+                errorMsg.style.display = 'block';
+                return;
+            }
+            
+            // Show loading spinner
+            spinner.style.display = 'block';
+            errorMsg.style.display = 'none';
+            resultContainer.style.display = 'none';
+            
+            // Simulate API call delay
+            setTimeout(() => {
+                spinner.style.display = 'none';
+                
+                // Check if URL looks valid (very basic validation)
+                if (urlInput.value.includes(platform.toLowerCase())) {
+                    // Mock successful response
+                    resultContainer.innerHTML = `
+                        <div class="video-preview">
+                            <img src="https://via.placeholder.com/400x225?text=Video+Thumbnail" alt="Video thumbnail">
+                            <h3>Sample ${platform} Video Title</h3>
+                        </div>
+                        <div class="download-options">
+                            <div class="download-option">
+                                <span>HD 1080p</span>
+                                <button onclick="downloadFile('${platform}', '1080p')">Download</button>
+                            </div>
+                            <div class="download-option">
+                                <span>HD 720p</span>
+                                <button onclick="downloadFile('${platform}', '720p')">Download</button>
+                            </div>
+                            <div class="download-option">
+                                <span>Standard 480p</span>
+                                <button onclick="downloadFile('${platform}', '480p')">Download</button>
+                            </div>
+                        </div>
+                    `;
+                    resultContainer.style.display = 'block';
+                } else {
+                    errorMsg.textContent = `Please enter a valid ${platform} video URL`;
+                    errorMsg.style.display = 'block';
+                }
+            }, 1500);
+        }
+        
+        // Mock download file function
+        function downloadFile(platform, quality) {
+            alert(`This would download the ${platform} video in ${quality} quality in a real implementation.`);
+            // In a real app, this would initiate a file download
+            // window.location.href = `/download?platform=${platform}&quality=${quality}&url=${encodeURIComponent(url)}`;
+        }
+        
+        // Set up event listeners for each platform
+        document.getElementById('youtube-submit').addEventListener('click', () => mockDownload('youtube'));
+        document.getElementById('instagram-submit').addEventListener('click', () => mockDownload('instagram'));
+        document.getElementById('tiktok-submit').addEventListener('click', () => mockDownload('tiktok'));
+        
+        // Allow form submission with Enter key
+        document.querySelectorAll('.input-group input').forEach(input => {
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const platform = this.id.split('-')[0];
+                    mockDownload(platform);
+                }
+            });
+        });
+        
+        // Initialize AdSense (already in the head, this is just to ensure)
+        if (typeof adsbygoogle !== 'undefined') {
+            adsbygoogle.push({});
+        }
+    </script>
+    
+    <!-- Structured data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Video Downloader Tool",
+      "url": "https://yourwebsite.com",
+      "description": "Free online tool to download videos from YouTube, Instagram, and TikTok without watermark in HD quality.",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "VideoDownloader"
+      }
+    }
+    </script>
+</body>
+</html>
